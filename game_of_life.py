@@ -5,7 +5,7 @@ import sys
 pygame.init()
 pygame.display.set_caption('Game of Life')
 
-box_w, box_h, box_e = 60, 40, 15
+box_w, box_h, box_e = 100, 100, 10
 # width and height values boxwise
 # also box_e is edge size
 
@@ -22,7 +22,7 @@ neighbour_table = np.zeros((box_w, box_h), dtype=np.uint8)
 ##############################################################
 glider = False
 if glider:
-	top_left = 15, 15
+    top_left = 20, 20
     with open('glider.txt', 'r') as file:
         for index, line in enumerate(file):
             row = [int(x) for x in line.split(' ')]
@@ -46,7 +46,7 @@ palette['BLACK'] = 0, 0, 0
 palette['DARK_GRAY'] = 40, 40, 40
 # palette holds the color values
 
-while True: # The main loop of the program
+while True:  # The main loop of the program
     screen.fill(palette['GRAY'])
     for row in range(box_e, height, box_e):
         pygame.draw.line(screen, palette['BLACK'], (0, row), (width, row))
@@ -54,7 +54,7 @@ while True: # The main loop of the program
         pygame.draw.line(screen, palette['BLACK'], (col, 0), (col, height))
     # This block draws the default empty window with grids
 
-    while True: # The drawing loop
+    while True:  # The drawing loop
         exit_flag = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -89,12 +89,12 @@ while True: # The main loop of the program
                 # With right click as you draw boxes you can delete boxes the opposite logic
                 # applies
 
-        pygame.display.flip() # Draws the changes
+        pygame.display.flip()  # Draws the changes
 
-        if exit_flag: # If enter is pressed this is true, this loop ends
+        if exit_flag:  # If enter is pressed this is true, this loop ends
             break
 
-    while True: # Operating loop, boxes are drawen now they will operate
+    while True:  # Operating loop, boxes are drawen now they will operate
         exit_flag = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -150,20 +150,21 @@ while True: # The main loop of the program
             for box_y in range(box_h):
                 if life_table[box_x][box_y]:
                     temp = pygame.Rect(
-                        (box_x * box_e, box_y * box_e), (box_e, box_e))
+                        (box_x * box_e + 1, box_y * box_e + 1), (box_e - 1, box_e - 1))
                     pygame.draw.rect(screen, palette['DARK_GRAY'], temp)
                     del temp
         # This block of code first draws an empty screen with grids
-        # then checks the alive cells from the life_table, draws the alive ones.
+        # then checks the alive cells from the life_table, draws the alive
+        # ones.
 
-        pygame.display.flip() # Draws the changes made
+        pygame.display.flip()  #  Draws the changes made
 
-        pygame.time.delay(50)
+        # pygame.time.delay(10)
         # This delay is to see the blocks moving more clearlyi
         # you can change the delay as you wish.
         if exit_flag:
-        # If enter is pressed the loop will end and
-        # the program will start again
+            # If enter is pressed the loop will end and
+            # the program will start again
             break
 
-    life_table[:, :] = 0 # The program will restart so we reset the life table
+    life_table[:, :] = 0  # The program will restart so we reset the life table
