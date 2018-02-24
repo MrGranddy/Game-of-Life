@@ -18,3 +18,6 @@ start, at this mode the Game of Life cellular automata will run
 by the initial positions you are given, this is Game of Life.
 After you are satisfied you can press enter again to get back
 to the drawing mode and so on.
+
+### Edit: 
+A P5.js version is also added, working with a similiar logic.
